@@ -10,6 +10,12 @@ class ProductsController < ApplicationController
   end
 
   def create
+    @product = Product.new(product_params)
+    if @product.save
+      redirect_to @product, notice: "Product has been added."
+    else
+      render :new, error: "There was an issue adding your product. Error cause: #{@product.errors.full_messages}"
+    end
   end
 
   def show
@@ -19,6 +25,11 @@ class ProductsController < ApplicationController
   end
 
   def update
+    if @product.update(product_params)
+      redirect_to @product, notice: "Product has been updated."
+    else
+      render :edit, error: "There was an error editing your product. Error cause: #{@product.errors.full_messages}"
+    end
   end
 
   def destroy
@@ -28,5 +39,12 @@ class ProductsController < ApplicationController
 
   def set_product
     @product = Product.find(params[:id])
+  end
+
+  def product_params
+    params.require(:product).permit(
+      :description,
+      :quantity
+    )
   end
 end
