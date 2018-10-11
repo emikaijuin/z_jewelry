@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin_status, except: [:index, :show]
   
   def index
     @products ||= Product.all
@@ -39,6 +40,10 @@ class ProductsController < ApplicationController
 
   def set_product
     @product = Product.find(params[:id])
+  end
+
+  def check_admin_status
+    redirect_to root_url if !current_user || !current_user.admin?
   end
 
   def product_params
