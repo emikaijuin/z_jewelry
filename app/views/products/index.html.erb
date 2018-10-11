@@ -3,6 +3,8 @@
   <% @products.each do |product| %>
     <div class="product">
       <%= link_to product.description, product_path(product) %>
+      <%= link_to "Edit", edit_product_path(product) %>
+      <%= link_to "Delete", product_path(product), method: :delete %>
     </div>
   <% end %>
 </div>
