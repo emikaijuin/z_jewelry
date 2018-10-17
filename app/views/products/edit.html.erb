@@ -1,0 +1,8 @@
+<h3>Edit Product</h3>
+
+<%= form_for @product do |f| %>
+  <%= render "form", f: f %>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to "Back", product_path(@product) %>

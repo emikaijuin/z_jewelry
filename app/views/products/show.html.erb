@@ -1,0 +1,7 @@
+<h3><%= @product.description %></h3>
+
+<% # Admin only functionalities  %>
+<div>
+  <%= link_to "Edit", edit_product_path(@product) %>
+  <%= link_to "Delete", product_path(@product), method: :delete  %>
+</div>
